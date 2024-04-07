@@ -182,4 +182,4 @@ def random_string(length=4):
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True, host='0.0.0.0')
