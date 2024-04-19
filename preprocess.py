@@ -116,9 +116,10 @@ class Preprocess(DataScience):
         
         return categorical_columns
     
-    def data_ordinal_encoding(self, columns: List[str], mapping: Dict[str, Dict[str, int]]) -> DataFrame:
+    def data_ordinal_encoding(self, mapping: Dict[str, Dict[str, int]]) -> DataFrame:
         df = self.dataframe.copy()
 
+        columns = mapping.keys()
         for col in columns:
             df[col] = df[col].map(mapping[col])
 

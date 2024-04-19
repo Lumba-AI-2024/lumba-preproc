@@ -45,8 +45,37 @@ def cleaning_handler():
         else:
             preprocess.data_duplication_handler()
 
-    if request.args.get('outlier') == '1':
-        preprocess.data_outlier_handler()
+    # handle ordinal encoding
+    if request.args.get('ordinal_encoding') == '1':
+        if request.args.get('columns_ordinal_encoding') != '':
+            col = request.args.get('columns_ordinal_encoding').split(",")
+            col_ranks = request.args.get('ranks_ordinal_encoding').split(";")
+            
+            list_ranks = []
+            for ranks in col_ranks :
+                ranks.split(",")
+                multi_ranks = {}
+                i = 0
+                for key in ranks :
+                    multi_ranks[key] = i
+                    i+=1
+                list_ranks.append(multi_ranks)
+                
+            result_dict = dict(zip(col, multi_ranks))
+            preprocess.data_ordinal_encoding(result_dict)
+        else:
+            preprocess.data_ordinal_encoding()
+    
+    # handle encoding
+    if request.args.get('encoding') == '1':
+        if request.args.get('columns_encoding') != '':
+            col = request.args.get('columns_encoding').split(",")
+            preprocess.data_encoding(col)
+        else:
+            preprocess.data_encoding()
+
+    # if request.args.get('outlier') == '1':
+    #     preprocess.data_outlier_handler()
 
     # generate new file name
     new_file_name = generate_file_name(file_name)
@@ -103,6 +132,39 @@ def cleaning_handler():
     return Response(json.loads(preprocess.dataframe.head(10).to_json()), status=200)
 
 
+##masih gayakin sama scaler
+@app.route("/standardscaler/")
+def standard_scaler():
+    try:
+        file_name = request.args.get('filename')
+        username = request.args.get('username')
+        workspace = request.args.get('workspace')
+    except:
+        return Response({'message': "input error"}, status=400)
+
+    current_path = os.getcwd()
+    save_path = f'{current_path}/directory/{username}/{workspace}/{file_name}'
+    dataframe = pandas.read_csv(save_path)
+    preprocess = Preprocess(dataframe=dataframe)
+    result = preprocess.data_standardization()
+    return Response(result, status=200)
+
+@app.route("/minmaxscaler/")
+def minmax_scaler():
+    try:
+        file_name = request.args.get('filename')
+        username = request.args.get('username')
+        workspace = request.args.get('workspace')
+    except:
+        return Response({'message': "input error"}, status=400)
+
+    current_path = os.getcwd()
+    save_path = f'{current_path}/directory/{username}/{workspace}/{file_name}'
+    dataframe = pandas.read_csv(save_path)
+    preprocess = Preprocess(dataframe=dataframe)
+    result = preprocess.data_normalization()
+    return Response(result, status=200)
+
 @app.route("/null/")
 def null_check():
     try:
@@ -136,9 +198,8 @@ def duplication_check():
     result = preprocess.data_duplication_check()
     return Response(result, status=200)
 
-
-@app.route("/outlier/")
-def outlier_check():
+@app.route("/encode/")
+def encoding_check():
     try:
         file_name = request.args.get('filename')
         username = request.args.get('username')
@@ -150,25 +211,43 @@ def outlier_check():
     save_path = f'{current_path}/directory/{username}/{workspace}/{file_name}'
     dataframe = pandas.read_csv(save_path)
     preprocess = Preprocess(dataframe=dataframe)
-    result = preprocess.data_outlier_check()
+    result = preprocess.data_encode_check()
     return Response(result, status=200)
 
+# @app.route("/outlier/")
+# def outlier_check():
+#     try:
+#         file_name = request.args.get('filename')
+#         username = request.args.get('username')
+#         workspace = request.args.get('workspace')
+#     except:
+#         return Response({'message': "input error"}, status=400)
 
-@app.route("/boxplot/")
-def get_boxplot():
-    try:
-        file_name = request.args.get('filename')
-        username = request.args.get('username')
-        workspace = request.args.get('workspace')
-    except:
-        return Response({'message': "input error"}, status=400)
+#     current_path = os.getcwd()
+#     save_path = f'{current_path}/directory/{username}/{workspace}/{file_name}'
+#     dataframe = pandas.read_csv(save_path)
+#     preprocess = Preprocess(dataframe=dataframe)
+#     result = preprocess.data_outlier_check()
+#     return Response(result, status=200)
 
-    current_path = os.getcwd()
-    save_path = f'{current_path}/directory/{username}/{workspace}/{file_name}'
-    dataframe = pandas.read_csv(save_path)
-    analysis = Analysis(dataframe=dataframe)
-    result = json.loads(analysis.get_box_plot_data())
-    return Response(result, status=200)
+
+# @app.route("/boxplot/")
+# def get_boxplot():
+#     try:
+#         file_name = request.args.get('filename')
+#         username = request.args.get('username')
+#         workspace = request.args.get('workspace')
+#     except:
+#         return Response({'message': "input error"}, status=400)
+
+#     current_path = os.getcwd()
+#     save_path = f'{current_path}/directory/{username}/{workspace}/{file_name}'
+#     dataframe = pandas.read_csv(save_path)
+#     analysis = Analysis(dataframe=dataframe)
+#     result = json.loads(analysis.get_box_plot_data())
+#     return Response(result, status=200)
+
+
 
 
 def generate_file_name(file_name):
