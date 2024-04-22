@@ -1,0 +1,196 @@
+{
+	"info": {
+		"_postman_id": "74a0137d-e6b8-481b-a268-4d7ebd49b498",
+		"name": "Preproc",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Null Check",
+			"id": "cd8808dd-afb6-4f04-8750-f99a5893cfec",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{base_url}}/null?username={{username}}&workspace={{workspace}}&filename={{filename}}",
+					"protocol": "http",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"null"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "{{username}}"
+						},
+						{
+							"key": "workspace",
+							"value": "{{workspace}}"
+						},
+						{
+							"key": "filename",
+							"value": "{{filename}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Master Handler",
+			"id": "6637d243-816b-488f-9974-d560a87e023e",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{base_url}}/handle?username={{username}}&workspace={{workspace}}&filename={{filename}}",
+					"protocol": "http",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"handle"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "{{username}}"
+						},
+						{
+							"key": "workspace",
+							"value": "{{workspace}}"
+						},
+						{
+							"key": "filename",
+							"value": "{{filename}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Outlier Handler",
+			"id": "584f1532-a0c1-482d-9c3f-cbd835fbbbb1",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{base_url}}/outlier?username={{username}}&workspace={{workspace}}&filename={{filename}}",
+					"protocol": "http",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"outlier"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "{{username}}"
+						},
+						{
+							"key": "workspace",
+							"value": "{{workspace}}"
+						},
+						{
+							"key": "filename",
+							"value": "{{filename}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "BoxPlot Handler",
+			"id": "6be8044b-6ed5-4f20-804a-a94f824b79e1",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{base_url}}/null?username={{username}}&workspace={{workspace}}&filename={{filename}}",
+					"protocol": "http",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"null"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "{{username}}"
+						},
+						{
+							"key": "workspace",
+							"value": "{{workspace}}"
+						},
+						{
+							"key": "filename",
+							"value": "{{filename}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				],
+				"id": "9a5b9ef7-14a3-4ffc-83d0-f3cf53051c32"
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				],
+				"id": "17f1481f-9aec-4563-8a1a-c1767822b29c"
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "127.0.0.1:5000"
+		},
+		{
+			"key": "username",
+			"value": "gbhisma",
+			"type": "string"
+		},
+		{
+			"key": "workspace",
+			"value": "ws1",
+			"type": "string"
+		},
+		{
+			"key": "filename",
+			"value": "affairs.csv",
+			"type": "string"
+		}
+	]
+}
