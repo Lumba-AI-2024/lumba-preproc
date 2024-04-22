@@ -4,7 +4,7 @@ import random
 import string
 
 import pandas
-from flask import Flask, Response, request
+from flask import Flask, Response, request, jsonify
 
 from analysis import Analysis
 from preprocess import Preprocess
@@ -129,7 +129,7 @@ def cleaning_handler():
     # # save file model to database
     # file_serializer.save()
 
-    return Response(json.loads(preprocess.dataframe.head(10).to_json()), status=200)
+    return jsonify(preprocess.dataframe.head(10).to_json()), 200
 
 
 ##masih gayakin sama scaler
@@ -147,7 +147,7 @@ def standard_scaler():
     dataframe = pandas.read_csv(save_path)
     preprocess = Preprocess(dataframe=dataframe)
     result = preprocess.data_standardization()
-    return Response(result, status=200)
+    return jsonify(result), 200
 
 @app.route("/minmaxscaler/")
 def minmax_scaler():
@@ -163,7 +163,7 @@ def minmax_scaler():
     dataframe = pandas.read_csv(save_path)
     preprocess = Preprocess(dataframe=dataframe)
     result = preprocess.data_normalization()
-    return Response(result, status=200)
+    return jsonify(result), 200
 
 @app.route("/null/")
 def null_check():
@@ -179,7 +179,7 @@ def null_check():
     dataframe = pandas.read_csv(save_path)
     preprocess = Preprocess(dataframe=dataframe)
     result = preprocess.data_null_check()
-    return Response(result, status=200)
+    return jsonify(result), 200
 
 
 @app.route("/duplication/")
@@ -196,7 +196,7 @@ def duplication_check():
     dataframe = pandas.read_csv(save_path)
     preprocess = Preprocess(dataframe=dataframe)
     result = preprocess.data_duplication_check()
-    return Response(result, status=200)
+    return jsonify(result), 200
 
 @app.route("/encode/")
 def encoding_check():
@@ -212,7 +212,7 @@ def encoding_check():
     dataframe = pandas.read_csv(save_path)
     preprocess = Preprocess(dataframe=dataframe)
     result = preprocess.data_encode_check()
-    return Response(result, status=200)
+    return jsonify(result), 200
 
 # @app.route("/outlier/")
 # def outlier_check():
@@ -228,7 +228,7 @@ def encoding_check():
 #     dataframe = pandas.read_csv(save_path)
 #     preprocess = Preprocess(dataframe=dataframe)
 #     result = preprocess.data_outlier_check()
-#     return Response(result, status=200)
+#     return jsonify(result), 200
 
 
 # @app.route("/boxplot/")
@@ -245,7 +245,7 @@ def encoding_check():
 #     dataframe = pandas.read_csv(save_path)
 #     analysis = Analysis(dataframe=dataframe)
 #     result = json.loads(analysis.get_box_plot_data())
-#     return Response(result, status=200)
+#     return jsonify(result), 200
 
 
 
