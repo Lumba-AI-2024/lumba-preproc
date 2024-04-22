@@ -2,7 +2,7 @@
 
 
 
-Designed to be scalable via K8s cluster. Made with flask.
+Designed to be scalable via K8s cluster. Made with [flask](https://flask.palletsprojects.com/en/3.0.x/quickstart/) . 
 
 #### ToDo:
 
@@ -13,13 +13,18 @@ Designed to be scalable via K8s cluster. Made with flask.
 
 ### Dev Guide
 
-1. Local dev
+1. Create the file directory
+   ```
+   mkdir directory/{{username}}/{{workspacename}}
+   ```
+2. Put csv files into the above folder
+3. Run on local dev
 
     ```
     flask --app app run
     ```
-
-2. Docker build and run
+4. Import Postman Collection, change the collection variables accordingly
+5. (Optional) Docker build and run
 
     ```
    docker build -f Dockerfile -t lumba-preproc:latest .
