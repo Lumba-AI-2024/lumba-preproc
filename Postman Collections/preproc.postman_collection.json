@@ -15,7 +15,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{base_url}}/null?username={{username}}&workspace={{workspace}}&filename={{filename}}",
+					"raw": "http://{{base_url}}/null?username={{username}}&workspace={{workspace}}&filename={{filename}}&lalala",
 					"protocol": "http",
 					"host": [
 						"{{base_url}}"
@@ -35,6 +35,10 @@
 						{
 							"key": "filename",
 							"value": "{{filename}}"
+						},
+						{
+							"key": "lalala",
+							"value": null
 						}
 					]
 				}
