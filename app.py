@@ -32,18 +32,10 @@ def cleaning_handler():
     preprocess = Preprocess(dataframe=dataframe)
 
     if request.args.get('missing') == '1':
-        if request.args.get('columns_missing') != '':
-            col = request.args.get('columns_missing').split(",")
-            preprocess.data_null_handler(col)
-        else:
-            preprocess.data_null_handler()
+        preprocess.data_null_handler()
 
     if request.args.get('duplication') == '1':
-        if request.args.get('columns_duplication') != '':
-            col = request.args.get('columns_duplication').split(",")
-            preprocess.data_duplication_handler(col)
-        else:
-            preprocess.data_duplication_handler()
+       preprocess.data_duplication_handler()
 
     # handle ordinal encoding
     if request.args.get('ordinal_encoding') == '1':
@@ -51,25 +43,21 @@ def cleaning_handler():
             col = request.args.get('columns_ordinal_encoding').split(",")
             col_ranks = request.args.get('ranks_ordinal_encoding').split(";")
             
-            list_ranks = []
-            for ranks in col_ranks :
-                ranks.split(",")
-                multi_ranks = {}
-                i = 0
-                for key in ranks :
-                    multi_ranks[key] = i
-                    i+=1
-                list_ranks.append(multi_ranks)
+            result_dict = {}
+            for i, column in enumerate(col):
+                ranks = col_ranks[i].split(",")
+                result_dict[column] = {rank: idx for idx, rank in enumerate(ranks)}
                 
-            result_dict = dict(zip(col, multi_ranks))
             preprocess.data_ordinal_encoding(result_dict)
         else:
             preprocess.data_ordinal_encoding()
     
     # handle encoding
+    kolom = []
     if request.args.get('encoding') == '1':
         if request.args.get('columns_encoding') != '':
             col = request.args.get('columns_encoding').split(",")
+            kolom = col
             preprocess.data_encoding(col)
         else:
             preprocess.data_encoding()
@@ -106,6 +94,7 @@ def cleaning_handler():
     if len(non_numeric_type) != 0:
         non_numeric_type = ','.join(non_numeric_type)
 
+    # retu
     '''
     The following lines are commented out because it requires interaction with the database.
     This service strictly preprocess and returns the result. Any interaction with the database 
@@ -129,7 +118,11 @@ def cleaning_handler():
     # # save file model to database
     # file_serializer.save()
 
-    return jsonify(preprocess.dataframe.head(10).to_json()), 200
+# Convert dataframe head to JSON format
+    head_json = preprocess.dataframe.head(10).to_dict(orient='records')
+
+    return jsonify(head_json), 200
+
 
 
 ##masih gayakin sama scaler

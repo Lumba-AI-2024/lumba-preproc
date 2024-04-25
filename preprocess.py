@@ -16,17 +16,14 @@ class Preprocess(DataScience):
 
     def data_null_check(self) -> Dict[str, int]:
         df = self.dataframe.copy()
-        total_null_for_each_column = dict(df.isnull().sum())
+        total_null_for_each_column = df.isnull().sum().astype(int).to_dict()
 
         return total_null_for_each_column
 
-    def data_null_handler(self, columns: List[str] = None) -> DataFrame:
+    def data_null_handler(self) -> DataFrame:
         df = self.dataframe.copy()
 
-        if columns != None:
-            df.dropna(subset=columns, inplace=True)
-        else:
-            df.dropna(inplace=True)
+        df.dropna(inplace=True)
 
         self.dataframe = df
 
@@ -38,13 +35,10 @@ class Preprocess(DataScience):
 
         return total_duplicate
 
-    def data_duplication_handler(self, columns: List[str] = None) -> DataFrame:
+    def data_duplication_handler(self) -> DataFrame:
         df = self.dataframe.copy()
 
-        if columns != None:
-            df.drop_duplicates(subset=columns, inplace=True)
-        else:
-            df.drop_duplicates(inplace=True)
+        df.drop_duplicates()
 
         self.dataframe = df
 
