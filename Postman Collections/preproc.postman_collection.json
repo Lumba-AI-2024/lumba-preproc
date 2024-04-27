@@ -91,6 +91,42 @@
 			"response": []
 		},
 		{
+			"name": "Master Handler Copy",
+			"id": "ba39296b-3085-44cc-9ec1-ecb9374e0b25",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{base_url}}/handle?username={{username}}&workspace={{workspace}}&filename={{filename}}",
+					"protocol": "http",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"handle"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "{{username}}"
+						},
+						{
+							"key": "workspace",
+							"value": "{{workspace}}"
+						},
+						{
+							"key": "filename",
+							"value": "{{filename}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Outlier Handler",
 			"request": {
 				"method": "GET",
