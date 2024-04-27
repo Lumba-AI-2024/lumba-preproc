@@ -1,16 +1,13 @@
 {
 	"info": {
-		"_postman_id": "74a0137d-e6b8-481b-a268-4d7ebd49b498",
+		"_postman_id": "d1aa1522-3b63-47aa-b9df-6ccfccac55dc",
 		"name": "Preproc",
-		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27303379"
 	},
 	"item": [
 		{
 			"name": "Null Check",
-			"id": "cd8808dd-afb6-4f04-8750-f99a5893cfec",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -43,15 +40,11 @@
 		},
 		{
 			"name": "Master Handler",
-			"id": "6637d243-816b-488f-9974-d560a87e023e",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{base_url}}/handle?username={{username}}&workspace={{workspace}}&filename={{filename}}",
+					"raw": "http://{{base_url}}/handle?username={{username}}&workspace={{workspace}}&filename={{filename}}&columns_encoding=doors,persons&encoding=1&columns_ordinal_encoding=buying,meant,lug_boot,safety,class&ranks_ordinal_encoding=vhigh,high,med,low;vhigh,high,med,low;small,med,big;low,med,high;unacc,acc,vgood,good&ordinal_encoding=1",
 					"protocol": "http",
 					"host": [
 						"{{base_url}}"
@@ -71,6 +64,26 @@
 						{
 							"key": "filename",
 							"value": "{{filename}}"
+						},
+						{
+							"key": "columns_encoding",
+							"value": "doors,persons"
+						},
+						{
+							"key": "encoding",
+							"value": "1"
+						},
+						{
+							"key": "columns_ordinal_encoding",
+							"value": "buying,meant,lug_boot,safety,class"
+						},
+						{
+							"key": "ranks_ordinal_encoding",
+							"value": "vhigh,high,med,low;vhigh,high,med,low;small,med,big;low,med,high;unacc,acc,vgood,good"
+						},
+						{
+							"key": "ordinal_encoding",
+							"value": "1"
 						}
 					]
 				}
@@ -79,10 +92,6 @@
 		},
 		{
 			"name": "Outlier Handler",
-			"id": "584f1532-a0c1-482d-9c3f-cbd835fbbbb1",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -115,10 +124,6 @@
 		},
 		{
 			"name": "BoxPlot Handler",
-			"id": "6be8044b-6ed5-4f20-804a-a94f824b79e1",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -157,8 +162,7 @@
 				"type": "text/javascript",
 				"exec": [
 					""
-				],
-				"id": "9a5b9ef7-14a3-4ffc-83d0-f3cf53051c32"
+				]
 			}
 		},
 		{
@@ -167,8 +171,7 @@
 				"type": "text/javascript",
 				"exec": [
 					""
-				],
-				"id": "17f1481f-9aec-4563-8a1a-c1767822b29c"
+				]
 			}
 		}
 	],
@@ -189,7 +192,7 @@
 		},
 		{
 			"key": "filename",
-			"value": "affairs.csv",
+			"value": "car.data",
 			"type": "string"
 		}
 	]
