@@ -43,6 +43,18 @@ class Preprocess(DataScience):
         self.dataframe = df
 
         return df
+    
+    # create a function to return categorical columns and return dictionary of column name and unique values
+    def data_categorical_check(self) -> Dict[str, List[str]]:
+        df = self.dataframe.copy()
+
+        categorical_columns = dict()
+        for col in df.columns:
+            if df[col].dtype == "object":
+                categorical_columns[col] = df[col].unique()
+
+        return categorical_columns
+    
 
     # def data_outlier_check(self) -> Dict[str, int]:
     #     """
