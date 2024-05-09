@@ -207,6 +207,22 @@ def encoding_check():
     result = preprocess.data_encode_check()
     return jsonify(result), 200
 
+@app.route("/categoricalcheck/")
+def categorical_check():
+    try:
+        file_name = request.args.get('filename')
+        username = request.args.get('username')
+        workspace = request.args.get('workspace')
+    except:
+        return Response({'message': "input error"}, status=400)
+
+    current_path = os.getcwd()
+    save_path = f'{current_path}/directory/{username}/{workspace}/{file_name}'
+    dataframe = pandas.read_csv(save_path)
+    preprocess = Preprocess(dataframe=dataframe)
+    result = preprocess.data_categorical_check()
+    return jsonify(result), 200
+
 # @app.route("/outlier/")
 # def outlier_check():
 #     try:
